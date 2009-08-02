@@ -1,5 +1,5 @@
 .new_post
-  - form_for :posts do |f|
+  - form_for @post do |f|
     %h3
       = f.label :title, "Title:"
       = f.text_field :title

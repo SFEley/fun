@@ -6,7 +6,7 @@ Feature: Make a post
 Scenario: New post with title
   Given I am a logged in user
     And I am on the home page
-  When I follow "New post"
+  When I click on "New Post"
    And I fill in "Title" with "This is my test post"
    And I fill in "Message" with "This is a test message body."
    And I press "Post!"

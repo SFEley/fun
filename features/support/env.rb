@@ -1,5 +1,5 @@
 # Sets up the Rails environment for Cucumber
-ENV["RAILS_ENV"] ||= "cucumber"
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 require 'cucumber/rails/world'
 
@@ -14,12 +14,22 @@ Cucumber::Rails.use_transactional_fixtures
 # (e.g. rescue_action_in_public / rescue_responses / rescue_from)
 Cucumber::Rails.bypass_rescue
 
-require 'webrat'
-require 'cucumber/webrat/table_locator' # Lets you do table.diff!(table_at('#my_table').to_a)
-
-Webrat.configure do |config|
-  config.mode = :rails
-end
 
 require 'cucumber/rails/rspec'
-require 'webrat/core/matchers'
+require 'firewatir'
+
+include FireWatir
+
+Browser = Firefox.new
+
+Before do
+  @environment ||= 'http://fun_test.local'
+end
+
+
+at_exit do
+  sleep 5
+  Browser.close
+end
+
+
