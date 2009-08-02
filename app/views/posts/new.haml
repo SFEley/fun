@@ -1,0 +1,10 @@
+.new_post
+  - form_for :posts do |f|
+    %h3
+      = f.label :title, "Title:"
+      = f.text_field :title
+    %p
+      = f.label :message, "Message:"
+      = f.text_area :message
+    = f.submit "Post!"
+    
