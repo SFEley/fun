@@ -1,0 +1,26 @@
+Viewing Posts
+=============
+
+The BDD/Cucumber gurus say you're supposed to keep asking "Why?" in these feature descriptions until you get to something that 1.) _Increases revenue_, or 2.) _Protects revenue_, or 3.) _Manages costs._  But this isn't a commercial project. So my features will be about increasing fun, protecting fun, or managing time.
+
+The overall feature I want is this:
+
+    As a random Internet surfer
+    I want to view Steve's collected wisdom
+    So that I can be entertained, enlightened, and/or exasperated
+    
+Note that I'm putting _viewing_ posts as my first feature, ahead of _creating_ posts. That's because it's more important. Blogs are to show off. I can load in content in the back end until I have a creation interface -- but if there's no place to see them, why bother?
+
+Here's the first scenario:
+
+    Scenario: First look
+      Given the first 2 diary posts
+      When I go to the homepage
+      Then I should see "Write a simple Tumblr-like aggregatorish"
+       And I should see "The overall feature I want"
+       
+Yeah, I'm being meta.  Usually when I'm just starting something out I'll use the Faker gem to create fake content -- but in this case, I'm already writing notes. So why not use them?
+
+I'll copy all that into **fun/features/view\_posts.feature** and run it now.
+
+

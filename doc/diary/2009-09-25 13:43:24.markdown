@@ -1,0 +1,18 @@
+Starting Out
+============
+So my goals are:
+
+1. Write a simple Tumblr-like aggregatorish... _thing_... that I can use to collect any Twitter tweets, LiveJournal posts, email messages, or whatever else I do that might be clever and which I might want to refer to later (or have others refer to -- wouldn't that be swell.)
+2. Have a practical MongoDB project in such a state that it's worth showing when I present at the Atlanta Ruby Users Group meeting on October 7.
+3. Document real behavior-driven development (BDD) using Cucumber and RSpec in a real context.
+
+First steps. I just created the Rails project and added my favorite toys:
+
+    rails fun
+    cd fun
+    script/generate rspec
+    script/generate cucumber
+    haml --rails .
+    git add . && git commit -am "Start from scratch"
+    
+Because there is no interface yet to make posts in, I'm saving this in a text file under **fun/doc/diary** with a timestamp as the filename -- it'll become a fixture record.  Next up is the first Cucumber story.

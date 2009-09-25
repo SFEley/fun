@@ -1,0 +1,26 @@
+Oops!
+=====
+
+Running `rake cucumber` gives me this:
+
+    [15:47][~/projects/fun(master)]$ rake cucumber
+    (in /Users/steve/projects/fun)
+    /Users/steve/projects/fun/db/schema.rb doesn't exist yet. Run "rake db:migrate" to create it then try again. If you do not intend to use a database, you should instead alter /Users/steve/projects/fun/config/environment.rb to prevent active_record from loading: config.frameworks -= [ :active_record ]
+    
+Part of this exercise is to use MongoDB, so I'll do what the nice error message suggests.  I'll remove ActiveRecord from the configuration and add the MongoMapper gem:
+
+    # /config/environment.rb
+    config.frameworks -= [ :active_record ]
+    config.gem "mongomapper"
+
+I'm also going to create an initializer to declare the one thing MongoMapper needs:
+
+    # /config/initializers/mongomapper.rb
+    require 'mongomapper'
+
+    # Different databases by environment
+    MongoMapper.database = "fun_#{ENV['RAILS_ENV']}"
+    
+I'd already set up MongoDB on my development machine using MacPorts (`sudo port install mongodb`) and created a launch task to make it run, so I'm good to go.  One of the nice things about MongoMapper is that it will automatically create anything it needs the first time it needs it: the database itself, collections, etc.  No migrations or Rake tasks to roll anything forward.
+
+After this, running `rake cucumber` simply tells me that the first step in my story isn't implemented yet.  Let's go there.

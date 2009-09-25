@@ -1,0 +1,29 @@
+Given the first 2 diary posts
+=============================
+
+    You can implement step definitions for undefined steps with these snippets:
+
+    Given /^the first 2 diary posts$/ do
+      pending
+    end
+    
+Right.  So now I actually have to start _thinking._  But not too much.  I have these blog posts in text files, so the first thing I'll want to do is import those text files.  I'm not going to write a feature for that because it isn't really a brag point for the app, just a convenience.  But I _will_ write some RSpec tests for it:
+
+    # spec/models/post_spec.rb
+    require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
+    describe Post do
+      describe "importing" do
+        before(:each) do
+          @files = Dir.glob(File.join(RAILS_ROOT, 'doc', 'diary', '*.markdown'))
+        end
+
+        it "can import a single text file" do
+          p = Post.import(@files.first)
+          p.content.should =~ /Have a practical MongoDB project/
+        end
+      end
+
+    end
+    
+That's the first one.  To make it work I need to create the Post model, write an import class method, etc.  ...Which I will now do, and I'm going to skip ahead a bit faster than step-by-step.
