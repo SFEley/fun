@@ -26,4 +26,47 @@ Right.  So now I actually have to start _thinking._  But not too much.  I have t
 
     end
     
-That's the first one.  To make it work I need to create the Post model, write an import class method, etc.  ...Which I will now do, and I'm going to skip ahead a bit faster than step-by-step.
+That's the first one.  To make it work I need to create the Post model, write an import class method, etc.  ...Which I will now do:
+
+    class Post
+      include MongoMapper::Document
+
+      key :content, :required => true
+      timestamps!
+
+      def self.import(source)
+        if File.exists?(source)
+          timestamp = File.basename(source, '.*').to_time
+          find_by_created_at(timestamp) or begin
+            p = create(:content => File.read(source))
+            p.update_attributes(:created_at => timestamp) # Must override after save
+            p
+          end
+        end
+      end
+    end
+    
+Not too complicated.  After we have that, implementing the Given step to import our fixture files (i.e., these posts) is very nearly a one-liner:
+
+    DIARY_FILES = Dir.glob(File.join(RAILS_ROOT, 'doc', 'diary', '*'))
+
+    Given /^the first (\d+) diary posts$/ do |num|
+      count = num.to_i - 1  # Because 'num' is a string, and arrays are 0-based
+      DIARY_FILES[0..count].each {|file| Post.import(file)}
+    end
+
+Whew!  So we run that, and...  `rake cucumber` breaks now with "No route defined."  Well, that's easy.  We just need a controller for the homepage to point at.  There's nothing special or MongoDBish about that, it's just Rails, so I'm not going to cover it -- except to say that I'm doing the _absolute minimum_ required to make the feature file pass.  For instance, here's the sum total of my view code (using Haml, which I love):
+
+    # app/views/posts/index.haml
+    = render @posts
+    
+And...
+
+    # app/view/posts/_post.haml
+    .post[post]
+      = post.content
+    
+That's it.  That's truly it.  The result looks like crap, we're not even rendering the Markdown so it's a big solid block of text, but it _works._  Markdown can be the next feature.
+
+
+
