@@ -32,5 +32,9 @@ describe Post do
       Post.count.should == 1
     end
   end
-    
+  
+  it "can format Markdown content to HTML" do
+    p = Post.new(content: "This is some _formatted_ text.")
+    p.to_html.should =~ /This is some <em>formatted<\/em> text/
+  end
 end

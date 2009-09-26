@@ -1,0 +1,26 @@
+Scenario 2: Formatting
+======================
+_(Note to self: if I ever create a scheme again for automatically importing things from text files, **do not** make timestamps in the filename part of the convention. They're a pain to type.)_
+
+So we have text soup, and we want pleasant little formatted blocks of text. I've been writing these in [Markdown](http://daringfireball.net/projects/markdown/syntax) because I like it so much, so testing whether it's working against my fixtures is nearly trivial. All I have to look for is the presence or absence of stuff other than the content:
+
+    # features/view_posts.feature
+    # [...]
+    
+    Scenario: Formatted text
+      Given the first 5 diary posts
+      When I go to the homepage
+      Then I should see "Deployment!"
+       And I should not see "===="
+       
+_(Note: This was initially looking for an H1 header tag; but the default Webrat steps were getting in my way, and I couldn't be bothered to write an XPath-type step just for this. Not seeing the Markdown text is enough to prove the case.)_
+      
+There are a gazillion gems to format Markdown in Ruby. I like [RDiscount](http://github.com/rtomayko/rdiscount). But where to do the actual conversion? This is a philosophical issue -- some would say this is presentation logic that belongs in the view. But I think it's a transformation upon data and belongs in the model. It's no different than implementing a `.to\_json` method. In fact, I'll call it `.to_html`, so that if we ever have subclasses of different sorts of content that aren't in Markdown, I can still call the same method:
+
+    # spec/models/post_spec.rb
+    it "can format Markdown content to HTML" do
+      p = Post.new(content: "This is some _formatted_ text.")
+      p.to_html.should =~ /This is some <em>formatted<\/em> text/
+    end
+    
+From there it's just including the gem, writing the method, and a one-word update to the view.

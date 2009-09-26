@@ -8,3 +8,9 @@ Feature: View Posts
     When I go to the homepage
     Then I should see "Write a simple Tumblr-like aggregatorish"
      And I should see "The overall feature I want"
+
+  Scenario: Formatted text
+   Given the first 5 diary posts
+   When I go to the homepage
+   Then I should see "Deployment!"
+    And I should not see "===="
