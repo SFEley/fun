@@ -1,0 +1,46 @@
+Deployment!
+===========
+First feature's done!  Hooray.  Time to deploy.
+
+Yes, I know.  It's not really _usable._  There's no formatting, no styling, it's just a nasty soup of text:
+
+![proto_01](/images/proto_01.png)
+
+But still.  If there's one thing I'm learning, it's that if you wait until things are _done_ to deploy, you'll never deploy.  So I'm pushing it into production right now, and then I'll do it again and again as features are ready.
+
+So there are two major steps:
+
+1. Tag with Git, and [push the tag to Github](htttp://github.com/sfeley/fun/tree/proto_01). I'm tagging it **proto_01** since I'm considering these prototype releases. If anyone wanted to, you could see the current state of things by doing a `git clone git://github.com/SFEley/fun.git` and then `git checkout proto_01`.
+2. Push it to a Web server and a world-accessible Mongo database.
+
+Because this is just a silly little personal blog, I'd prefer to put it into the world without spending any money.  Luckily, there are options for that these days.  I'm using [Heroku](http://www.heroku.com) for the Ruby hosting, and [MongoHQ](http://mongohq.com) for a free MongoDB database outside my own laptop.  I met the MongoHQ guys at this year's Ruby Hoedown and they sent me a beta code right away on emailing them to ask.  Their page is still sparse enough still that I wouldn't use them for anything mission-critical yet, but for cheap experimenting they're awesome.
+
+One minor challenge was figuring out how to keep my MongoHQ DB username and password secure, since I'm checking all this code into Github as an open source project.  Development and test DB credentials don't matter (I'm not using security on my local Mongo install anyway), but production credentials do. While I was at it, I decided I should secure the session key in production as well. I made a couple of false starts at this, making it way too complicated with YML files and putting too much into **.gitignore** -- and then remembered that Heroku [lets me set environment variables](http://docs.heroku.com/config-vars). And once they're set, they _stay_ set.  So the final answer was just a few lines of code:
+
+    # config/initializers/mongomapper.db
+    require 'mongomapper'
+
+    # Different databases by environment
+    # We're using environment variables here to be friendly for Heroku hosting
+    MongoMapper.connection = Mongo::Connection.new(ENV['FUN_MONGO_HOST']) if ENV['FUN_MONGO_HOST']
+    MongoMapper.database = "fun_#{ENV['RAILS_ENV']}"
+
+    if ENV['FUN_MONGO_USER'] && ENV['FUN_MONGO_PASS']
+      MongoMapper.database.authenticate(ENV['FUN_MONGO_USER'], ENV['FUN_MONGO_PASS'])
+    end
+    
+I could set those same variables inside a Web server, a shell script, or any other way I chose to run this. So it's total flexibility, and no need to worry about keeping some code from being checked into source.
+
+I did the same thing for the session key, as it was the only other thing I could think of that ought to stay secret:
+    
+    # config/initializers/session_store.rb
+    ActionController::Base.session = {
+      :key         => '_fun_session',
+      :secret      => ENV['FUN_SESSION_SECRET'] || '9adba21d0c78b0b4dff06ef2a7096add5e3e67552ed573fde59d95e3c1026cb58e6492d1f08fa6c1bb16a8ae22c00a45f30516d9cd1539f70320c3aba5654bc9'
+    }
+
+After that it was just `heroku create`, and then `heroku config:add` for all my environment variables, and `git push heroku master`.  That last one failed a few times because of gems missing on Heroku, so I had to create a **.gems** file [per their docs](http://docs.heroku.com/gems) and fiddle with dependencies until it all passed.
+
+Once it ran enough to give me a blank screen, I went into `heroku console` and ran my `Post.import()` method against all of these diary entries.  The result is that beautiful screenshot. This morning I remembered to set up a nicer domain for it, so you can now view it at [fun.extraneous.org](http://fun.extraneous.org) until it's ready to replace my older blog.
+
+Whew!  I think this took longer to type than it did to make happen.  Next: making it look better with Markdown.
