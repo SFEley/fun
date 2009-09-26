@@ -1,1 +1,2 @@
+mongodb-mongo --version '>=0.14' --source gems.github.com
 mongomapper --version '>=0.3.5'
