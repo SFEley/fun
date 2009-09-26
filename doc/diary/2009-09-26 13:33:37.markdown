@@ -1,5 +1,5 @@
-Scenario 2: Formatting
-======================
+Phase 2: Formatting the Text
+============================
 _(Note to self: if I ever create a scheme again for automatically importing things from text files, **do not** make timestamps in the filename part of the convention. They're a pain to type.)_
 
 So we have text soup, and we want pleasant little formatted blocks of text. I've been writing these in [Markdown](http://daringfireball.net/projects/markdown/syntax) because I like it so much, so testing whether it's working against my fixtures is nearly trivial. All I have to look for is the presence or absence of stuff other than the content:
@@ -23,4 +23,9 @@ There are a gazillion gems to format Markdown in Ruby. I like [RDiscount](http:/
       p.to_html.should =~ /This is some <em>formatted<\/em> text/
     end
     
-From there it's just including the gem, writing the method, and a one-word update to the view.
+From there it's just including the gem, writing the method, and a one-word update to the view.  That all took ten minutes (minus the time to write this or to wrestle with the Cucumber Webrat stuff) and results in a _much_ nicer page:
+
+![proto_02](/images/proto_02.png)
+
+Now to push, tag, and deploy. After this I want to fix the display order, and then I'll spend some more time making it look prettier without adding to functional requirements.
+ 
