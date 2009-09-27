@@ -1,0 +1,24 @@
+.post {
+  margin: 1em;
+  padding: 0.5em;
+  background-color: #ACD2DD;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -webkit-box-shadow: 0.5em 0.5em 0.75em #999;
+  -moz-box-shadow: 0.5em 0.5em 0.75em #999;
+  box-shadow: 0.5em 0.5em 0.75em #999; }
+
+body {
+  font: 87.5% "Bookman Old Style", Garamond, Georgia, serif; }
+
+#main {
+  width: 70em;
+  margin: 0px auto; }
+  #main #content {
+    width: 42em;
+    margin-right: 1em;
+    float: left; }
+  #main #sidebar {
+    width: 26em;
+    margin-left: 1em;
+    float: right; }
