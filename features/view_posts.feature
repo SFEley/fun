@@ -15,11 +15,11 @@ Feature: View Posts
    Then I should see "Deployment!"
     And I should not see "====="
     
-  Scenario: Display order
+  Scenario: Display order: forward chronological by default
    Given the first 6 diary posts
    When I go to the homepage
-   Then I should see "Phase 2: Formatting the Text" before "Deployment!"
-    And I should see "Deployment!" before "Starting Out"
+   Then I should see "Deployment!" before "Phase 2: Formatting the Text" 
+    And I should see "Starting Out" before "Deployment!" 
    
   # Scenario: Time Ago
   #  Given a post from 5 minutes ago
