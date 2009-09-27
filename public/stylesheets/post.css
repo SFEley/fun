@@ -1,15 +1,27 @@
 .post {
-  margin: 1em;
+  margin: 2em 0.5em;
   padding: 0.5em;
-  background-color: #ACD2DD;
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -webkit-box-shadow: 0.5em 0.5em 0.75em #999;
   -moz-box-shadow: 0.5em 0.5em 0.75em #999;
   box-shadow: 0.5em 0.5em 0.75em #999;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #ACD2DD; }
   .post pre {
     padding: 1em 0px 1em 0px;
     background-color: #779299;
     -webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#ACD2DD), to(#ACD2DD), color-stop(0.5, #779299)) 1 1 1 1 repeat repeat;
+    background-image: -moz-linear-gradient(left top, left bottom, from(#ACD2DD), to(#ACD2DD), color-stop(0.5, #779299));
     overflow: auto; }
+
+.about {
+  margin: 2em 0.5em;
+  padding: 0.5em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -webkit-box-shadow: 0.5em 0.5em 0.75em #999;
+  -moz-box-shadow: 0.5em 0.5em 0.75em #999;
+  box-shadow: 0.5em 0.5em 0.75em #999;
+  overflow: hidden;
+  background-color: #E7E99C; }
