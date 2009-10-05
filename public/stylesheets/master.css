@@ -1,3 +1,20 @@
+body {
+  font: 87.5% "Bookman Old Style", Garamond, Georgia, serif; }
+
+#main {
+  width: 70em;
+  margin: 0px auto; }
+  #main #content {
+    width: 44em;
+    float: left; }
+  #main #sidebar {
+    width: 25em;
+    margin-left: 1em;
+    float: right; }
+
+.invisible {
+  opacity: 0; }
+
 .post {
   margin: 2em 0.5em;
   padding: 0.5em;
@@ -26,16 +43,11 @@
   overflow: hidden;
   background-color: #E7E99C; }
 
-body {
-  font: 87.5% "Bookman Old Style", Garamond, Georgia, serif; }
-
-#main {
-  width: 70em;
-  margin: 0px auto; }
-  #main #content {
-    width: 44em;
-    float: left; }
-  #main #sidebar {
-    width: 25em;
-    margin-left: 1em;
-    float: right; }
+form * {
+  font-family: "Bookman Old Style", Garamond, Georgia, serif;
+  font-size: 100%; }
+form label {
+  font-weight: bold; }
+form textarea {
+  width: 90%;
+  height: 10em; }

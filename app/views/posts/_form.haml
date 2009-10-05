@@ -1,0 +1,8 @@
+.post
+  - form_for post do |f|
+    %p
+      = f.label :content, "What do you have to say?"
+      %br
+      = f.text_area :content
+    %p
+      = f.submit "Say it!"

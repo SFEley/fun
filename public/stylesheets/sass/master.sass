@@ -1,8 +1,8 @@
-@import post
+!bookman = "\"Bookman Old Style\", Garamond, Georgia, serif"
 
 body
   // Font size set so an em is 14px
-  :font 87.5% "Bookman Old Style", Garamond, Georgia, serif
+  :font = 87.5% !bookman
   
 #main
   :width 70em
@@ -16,4 +16,9 @@ body
     :width 25em
     :margin-left 1em
     :float right
+
+.invisible
+  :opacity 0
   
+@import post
+@import forms
