@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_filter :authenticate, :except => [:index, :show]
 
   def index
-    @posts = Post.all(:order => 'created_at asc')
+    @posts = Post.all(:order => 'created_at desc')
   end
 
   def new

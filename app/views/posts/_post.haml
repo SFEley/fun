@@ -1,3 +1,4 @@
 .post[post]
+  .timestamp= "#{time_ago_in_words(post['created_at'])} ago"
   = post.to_html
   
