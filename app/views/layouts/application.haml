@@ -4,6 +4,7 @@
     %title Having Fun
     = stylesheet_link_tag "master"
   %body
+    = analytics_load
     #main
       #content
         = yield
@@ -13,5 +14,6 @@
           %p 
             This is the personal blog of Steve Eley. At some point I should put some more stuff here.
             =link_to "+", :new_post, :class => "invisible"
+    = analytics_track
             
       
