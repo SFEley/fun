@@ -1,4 +1,4 @@
 .post[post]
-  .timestamp= "#{time_ago_in_words(post['created_at'])} ago"
+  .timestamp{:title => post['created_at'].to_s(:long)}= "#{time_ago_in_words(post['created_at'])} ago"
   = post.to_html
   

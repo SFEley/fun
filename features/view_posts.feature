@@ -22,7 +22,7 @@ Feature: View Posts
     And I should see "Starting Out" after "Deployment!" 
    
   Scenario: Time Ago
-     Given a post from 5 minutes ago
-      When I go to the homepage
-      Then I should see "5 minutes ago"
-        
+   Given a post from 5 minutes ago
+    When I go to the homepage
+    Then I should see "5 minutes ago"
+      

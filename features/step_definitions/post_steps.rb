@@ -10,7 +10,7 @@ Given /^a post$/ do
   @post = Post.create(:content => "Just some random content")
 end
 
-Given /^a post (from .* ago|.* from now)$/ do |time|
+Given /^a post from (.* ago)$/ do |time|
   Given "a post"
   @post.update_attributes(:created_at => Chronic.parse(time))
 end
