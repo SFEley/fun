@@ -1,12 +1,13 @@
+@import variables
 @import boxes
 
 .post
   +prettybox
-  :background-color #ACD2DD
+  :background-color = !post_color
   
   pre
     :padding 1em 0px 1em 0px
-    :background-color #779299
+    :background-color = !code_color
     -webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#ACD2DD), to(#ACD2DD), color-stop(0.5, #779299)) 1 1 1 1 repeat repeat
     :background-image -moz-linear-gradient(left top, left bottom, from(#ACD2DD), to(#ACD2DD), color-stop(0.5, #779299)) 
     :overflow auto
@@ -18,5 +19,5 @@
 
 .about
   +prettybox
-  :background-color #E7E99C
+  :background-color = !about_color
   
