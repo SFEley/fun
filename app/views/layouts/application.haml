@@ -3,7 +3,8 @@
   %head
     %title Having Fun
     = stylesheet_link_tag "master"
-    = javascript_include_tag :all, :recursive => true, :cache => true
+    = javascript_include_tag "jquery-1.3.2.min"
+    = javascript_include_tag "application"
   %body
     = analytics_load
     #main
@@ -14,7 +15,7 @@
           %h1 Having Fun
           %p 
             This is the personal blog of Steve Eley. At some point I should put some more stuff here.
-            =link_to "+", :new_post, :class => "invisible"
+            =link_to "+", :new_post, :class => "invisible", :id => "link_new_post"
     = analytics_track
             
       
