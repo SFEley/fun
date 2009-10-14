@@ -5,10 +5,14 @@
 $(document).ready(function() {
   $('#link_new_post').click(function(event) {
     if ($('form#new_post').length==0) {  // Don't let this work more than once
-     $('<div class="post">').hide().prependTo($('#posts')).load("/posts/new").slideDown();
+     $('<div class="post">').hide()
+        .prependTo($('#posts'))
+        .ajaxComplete(function(info){
+            $(info.target).slideDown();
+          })
+        .load("/posts/new");
     }
     return false;
- } 
-    );
+ });
 });
 
